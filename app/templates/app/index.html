@@ -1,0 +1,63 @@
+{% extends "app/base.html" %}
+{% block title%}
+    <title>Todo List App</title>
+{%endblock title%}
+
+{% block main-content %}
+<div class="container">
+  <div class="row">
+    <h1>Todo List Table</h1>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <a class="btn btn-primary" href="{% url 'add' %}"
+        ><i class="fa fa-plus"> Add new Task</i></a
+      >
+    </div>
+    <div class="col-sm-6">
+      <a class="btn btn-danger" href=""
+        ><i class="fa fa-trash"> Delete All</i></a
+      >
+    </div>
+  </div>
+  <div class="row">
+    <br />
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">No</th>
+            <th scope="col">Tassk Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in tasks%}
+          <tr>
+            <th scope="row">{{task.id}}</th>
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>            
+            <td>{{task.status}}</td>
+            <td>              
+                <a class="btn btn-primary" href="{% url 'details' id=task.id %}"
+                  ><i class="far fa-eye"></i
+                ></a>                
+              <a class="btn btn-success" href="{% url 'edit' id=task.id %}">
+                <i class="fas fa-edit"></i>
+              </a>
+              <a class="btn btn-danger"  href="{% url 'delete' id=task.id %}">
+                <i class="far fa-trash-alt"></i>
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}
